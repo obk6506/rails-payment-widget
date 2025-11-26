@@ -2,17 +2,29 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # Render가 주는 DB 주소를 여기서 자동으로 읽게 합니다.
+  url: <%= ENV["DATABASE_URL"] %>
 
 development:
   <<: *default
   database: rails_payment_widget_development
+  # 로컬에서는 url을 안 쓰므로 덮어씌워서 비워줍니다.
+  url: 
 
 test:
   <<: *default
   database: rails_payment_widget_test
+  url: 
 
 production:
-  <<: *default
-  database: rails_payment_widget_production
-  username: rails_payment_widget
-  password: <%= ENV["RAILS_DB_PASSWORD"] %>
+  primary:
+    <<: *default
+  cache:
+    <<: *default
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *default
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *default
+    migrations_paths: db/cable_migrate
