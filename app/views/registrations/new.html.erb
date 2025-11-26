@@ -1,0 +1,8 @@
+<h1>회원가입</h1>
+
+<%= form_with model:@user, url: sign_up_path do |form| %>
+    <%= form.email_field :email_address, placeholder: "이메일" %><br>
+    <%= form.password_field :password, placeholder: "비밀번호" %>
+    <%= form.password_field :password_confirmation, placeholder: "비밀번호 확인" %><br>
+    <%= form.submit "회원가입" %>
+<% end %>

@@ -1,0 +1,45 @@
+<h1>토스 결제 위젯 테스트</h1>
+
+<!-- 1. 결제 위젯이 들어갈 자리 -->
+<div id="payment-method"></div>
+
+<!-- 2. 약관 동의가 들어갈 자리 (필수) -->
+<div id="agreement"></div>
+
+<!-- 3. 결제하기 버튼 -->
+<button id="payment-button">결제하기</button>
+
+<!-- 4. 토스 위젯 SDK 불러오기 -->
+<script src="https://js.tosspayments.com/v1/payment-widget"></script>
+
+<script>
+  // 5. 위젯용 클라이언트 키 넣어주세요
+  const clientKey = "<%= ENV['TOSS_CLIENT_KEY'] %>"
+  const customerKey = "<%= @customer_key %>" // 컨트롤러에서 만든 랜덤 ID
+
+  // 위젯 초기화
+  const paymentWidget = PaymentWidget(clientKey, customerKey)
+
+  // 6. 결제 방법(카드, 계좌 등) 렌더링
+  const paymentMethodWidget = paymentWidget.renderPaymentMethods(
+    "#payment-method", 
+    { value: 500 }, // 결제 금액 (500원)
+    { variantKey: "DEFAULT" } // 위젯 스타일 (기본)
+  )
+
+  // 7. 약관 렌더링
+  paymentWidget.renderAgreement("#agreement")
+
+  // 8. 결제하기 버튼 클릭 이벤트
+  const button = document.getElementById("payment-button")
+  button.addEventListener("click", function () {
+    paymentWidget.requestPayment({
+      orderId: "ORDER_" + new Date().getTime(),
+      orderName: "토스 티셔츠 외 2건",
+      successUrl: window.location.origin + "/payment/success",
+      failUrl: window.location.origin + "/payment/fail",
+      customerEmail: "customer123@gmail.com",
+      customerName: "김토스"
+    })
+  })
+</script>
