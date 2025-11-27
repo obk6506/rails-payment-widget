@@ -1,0 +1,16 @@
+<h1>📜 사주풀이 기록장 (벡터 확인용)</h1>
+
+<% @logs.each do |log| %>
+  <div style="border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; border-radius: 8px;">
+    <h3><%= log.name %>님의 운세</h3>
+    <p><%= log.content.truncate(50) %></p>
+    <p style="color: blue; font-size: 0.8em;">
+      <!-- 벡터 데이터가 있으면 있다고 표시 -->
+      <% if log.embedding.present? %>
+        ✅ 벡터 생성됨 (숫자 <%= log.embedding.size %>개)
+      <% else %>
+        ❌ 벡터 없음
+      <% end %>
+    </p>
+  </div>
+<% end %>

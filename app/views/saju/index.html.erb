@@ -1,0 +1,38 @@
+<h1>🔮 신비한 AI 사주풀이</h1>
+
+<%= form_with url: saju_stream_path, method: :post do |f| %>
+  <div>
+    <%= f.label :name, "이름" %><br>
+    <%= f.text_field :name, required: true %>
+  </div>
+  
+  <div>
+    <%= f.label :birth_date, "생년월일" %><br>
+    <%= f.date_field :birth_date, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :birth_time, "태어난 시간" %><br>
+    <%= f.time_field :birth_time %>
+  </div>
+
+  <div>
+    <%= f.label :city, "태어난 도시" %><br>
+    <%= f.text_field :city, placeholder: "예: 서울" %>
+  </div>
+
+  <div style="margin-top: 20px;">
+    <%= f.submit "운세 보기 (복채는 무료)", class: "btn" %>
+  </div>
+<% end %>
+
+
+<hr>
+
+<!-- 2. 여기가 핵심! Turbo Stream이 쏘는 데이터를 받는 안테나 -->
+<%= turbo_stream_from "saju_stream" %>
+
+<!-- 3. 결과가 표시될 빈 상자 -->
+<div id="saju_result_box" style="background-color: #f0f0f0; padding: 20px; border-radius: 10px; min-height: 100px;">
+  <p style="color: gray;">운세 보기를 누르면 도사님이 답변을 시작합니다...</p>
+</div>

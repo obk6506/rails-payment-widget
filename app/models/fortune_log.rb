@@ -1,0 +1,2 @@
+class FortuneLog < ApplicationRecord
+end

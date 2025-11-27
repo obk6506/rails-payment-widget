@@ -1,0 +1,14 @@
+<h1>🔮 사주 풀이 결과</h1>
+
+<div style="background-color: #f0f0f0; padding: 20px; border-radius: 10px; white-space: pre-wrap;">
+  <%= @content %>
+</div>
+
+<p>
+  <%= link_to "다시 보기", saju_index_path %>
+</p>
+
+<!-- 마음에 들면 결제 유도 -->
+<hr>
+<p>결과가 마음에 드셨나요? 복채를 내주시면 더 좋은 운이 들어옵니다!</p>
+<%= link_to "1,000원 복채 내기", payment_path %>
