@@ -117,6 +117,21 @@ class SetupSolidQueueAndCable < ActiveRecord::Migration[8.0]
       t.index ["task_key", "run_at"], name: "index_solid_queue_recurring_executions_on_task_key_and_run_at", unique: true
     end
     
+    create_table "solid_queue_recurring_tasks", force: :cascade do |t|
+      t.string "key", null: false
+      t.string "schedule", null: false
+      t.string "command", limit: 2048
+      t.string "class_name"
+      t.text "arguments"
+      t.string "queue_name"
+      t.integer "priority", default: 0
+      t.boolean "static", default: true, null: false
+      t.text "description"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.index ["key"], name: "index_solid_queue_recurring_tasks_on_key", unique: true
+      t.index ["static"], name: "index_solid_queue_recurring_tasks_on_static"
+    end    
     # 외래키 제약조건 (순서 중요)
     add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
     add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
