@@ -2,6 +2,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # Render 환경변수에서 주소 가져옴
   url: <%= ENV["DATABASE_URL"] %>
 
 development:
@@ -15,5 +16,12 @@ test:
   url: 
 
 production:
-  <<: *default
-  # primary, queue, cable... 이런 거 다 지우고 딱 기본만 남김!
+  # ★ Rails 8 필수 설정: 4개를 모두 명시해야 함 ★
+  primary:
+    <<: *default
+  cache:
+    <<: *default
+  queue:
+    <<: *default
+  cable:
+    <<: *default
