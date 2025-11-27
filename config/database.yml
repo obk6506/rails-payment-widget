@@ -2,13 +2,13 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  # Render가 주는 DB 주소를 여기서 자동으로 읽게 합니다.
+  # Render가 주는 DB 주소를 여기서 받습니다.
   url: <%= ENV["DATABASE_URL"] %>
 
 development:
   <<: *default
   database: rails_saju_development
-  # 로컬에서는 url을 안 쓰므로 덮어씌워서 비워줍니다.
+  # 로컬에선 url을 비워야 충돌이 안 납니다.
   url: 
 
 test:
@@ -17,15 +17,12 @@ test:
   url: 
 
 production:
+  # Rails 8의 4형제(기본, 캐시, 큐, 케이블) 모두 똑같은 DB를 쓰게 설정
   primary:
     <<: *default
   cache:
     <<: *default
-    migrations_paths: db/cache_migrate
   queue:
     <<: *default
-    migrations_paths: db/queue_migrate
   cable:
     <<: *default
-    migrations_paths: db/cable_migrate
-  database: rails_saju_production
