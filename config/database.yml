@@ -15,14 +15,12 @@ test:
   url: 
 
 production:
+  # 모든 기능을 하나의 DB(Render DB)로 통일
   primary:
     <<: *default
   cache:
     <<: *default
-    migrations_paths: db/cache_migrate
   queue:
     <<: *default
-    migrations_paths: db/queue_migrate  # 👈 여기가 중요! (작업 대기실 위치)
   cable:
     <<: *default
-    migrations_paths: db/cable_migrate  # 👈 여기가 중요! (통신실 위치)
