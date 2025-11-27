@@ -37,6 +37,11 @@ class SajuController < ApplicationController
     render :index
   end
 
+  def logs
+    # 최신순으로 가져오기
+    @logs = FortuneLog.order(created_at: :desc)
+  end
+  
   private
 
   def save_vector(name, content)
