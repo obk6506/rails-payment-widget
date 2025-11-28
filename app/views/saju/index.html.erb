@@ -17,7 +17,15 @@
     <%= f.label :city, "태어난 도시" %>
     <%= f.text_field :city %>
   </div>
-  
+
+
+  <div style="margin-top: 15px; padding: 10px; background: #f9f9f9; border-radius: 8px;">
+    <%= f.label :image, "📸 관상/손금 사진 (선택사항)" %><br>
+    <%= f.file_field :image, accept: "image/*" %>
+    <p style="font-size: 0.8em; color: gray;">* 사진을 넣으면 더 정확하게 분석해줍니다!</p>
+  </div>
+
+
   <div style="margin-top: 20px;">
     <%= f.submit "운세 보기 (5초 정도 걸려요)", class: "btn", onclick: "this.value='도사님 접신 중...'; this.disabled=true; this.form.submit();" %>
   </div>
