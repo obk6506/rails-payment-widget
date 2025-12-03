@@ -65,6 +65,6 @@ end
 
 gem "httparty", "~> 0.23.2"
 
-gem "dotenv-rails", "~> 3.1", groups: [:development, :test]
+gem "dotenv-rails", "~> 3.2", groups: [:development, :test]
 
 gem "neighbor", "~> 0.6.0"
