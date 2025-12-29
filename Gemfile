@@ -63,7 +63,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "httparty", "~> 0.23.2"
+gem "httparty", "~> 0.24.0"
 
 gem "dotenv-rails", "~> 3.1", groups: [:development, :test]
 
